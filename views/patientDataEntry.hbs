@@ -1,0 +1,180 @@
+<div class="light-page">
+    <br>
+    <p class = "left-dark-box">
+        {{#with onePatient}}
+            Hi {{this.first_name}}, welcome back.
+        {{/with}}
+    </p><br>
+    <h2>Please add your health readings for today:</h2>
+    <div class = "centre-light-box">
+        <p id="local_date_string"></p><br>
+        <form autocomplete="off" action="/main/patientDataEntry" method="POST">
+            <input type="hidden" id="current_date" name="timestamp" />
+            <input type="hidden" id="local_date" name="local_date" />
+            <input type="hidden" id="patient_id" name="patient_id" value={{onePatient._id}} />
+            <script>
+                var today = new Date();
+                var date = today.getDay()+', '+today.getDate()+' '+(today.getMonth()+1)+' '+today.getFullYear();
+                // want local date as ddmmyyyy
+                var local_date = ''+("0" + today.getDate()).slice(-2)+("0" + (today.getMonth() + 1)).slice(-2)+today.getFullYear();
+                document.getElementById("current_date").value = today;
+                document.getElementById("local_date").value = local_date;
+                document.getElementById("local_date_string").innerHTML = today.toDateString();
+            </script>
+            <table>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>Entered today?</th>
+                </tr>
+                <tr>
+                    <td>Blood glucose level:</td>
+                    <td><input type="number" id="blood_glucose" name="blood_glucose" step="any" min="0" max="200" /><span>mmol/L</span></td>
+                    <td><span id="blood_glucose_entered" style = "color:green; padding-left:30px; visibility:hidden">&#10003;</span></td>
+                </tr>
+                <tr>
+                    <td id="blood_glucose_line">Comment:</td>
+                    <td><input type="text" id="blood_glucose_comment" name="blood_glucose_comment" /></td>
+                </tr>
+                <tr><td><br/></td></tr>
+                <tr>
+                    <td>Weight:</td>
+                    <td><input type="number" id="weight" name="weight" step="any" min="0" max="700" /><span>kg&nbsp;&nbsp;</span></td>
+                    <td><span id="weight_entered" style = "color:green; padding-left:30px; visibility:hidden">&#10003;</span></td>
+                </tr>
+                <tr>
+                    <td id="weight_line">Comment:</td>
+                    <td><input type="text" id="weight_comment" name="weight_comment" /></td>
+                </tr>
+                <tr><td><br/></td></tr>
+                <tr>
+                    <td>Doses of insulin:</td>
+                    <td><input type="number" id="insulin_doses" name="insulin_doses" min="0" /><span>Doses</span></td>
+                    <td><span id="insulin_doses_entered" style = "color:green; padding-left:30px; visibility:hidden">&#10003;</span></td>
+                </tr>
+                <tr>
+                    <td id="insulin_doses_line">Comment:</td>
+                    <td><input type="text" id="insulin_doses_comment" name="insulin_doses_comment" /></td>
+                </tr>
+                <tr><td><br/></td></tr>
+                <tr>
+                    <td>Exercise:</td>
+                    <td><input type="number" id="exercise" name="exercise" min="0" /><span>steps</span></td>
+                    <td><span id="exercise_entered" style = "color:green; padding-left:30px; visibility:hidden">&#10003;</span></td>
+                </tr>
+                <tr>
+                    <td id="exercise_line">Comment:</td>
+                    <td><input type="text" id="exercise_comment" name="exercise_comment" /></td>
+                </tr>    
+                <tr><td><br/></td></tr>                   
+            </table>
+            <script>
+                {{#with oneItem}}
+                    {{#if this.blood_glucose}}
+                        document.getElementById("blood_glucose").value = {{this.blood_glucose}};
+                        document.getElementById("blood_glucose").readOnly = true;
+                        document.getElementById("blood_glucose").style.backgroundColor = "#D4F8F9";
+                        document.getElementById("blood_glucose_entered").style.visibility = "visible";
+                        document.getElementById("blood_glucose_line").style.visibility = "hidden";
+                        document.getElementById("blood_glucose_comment").readOnly = true;
+                        document.getElementById("blood_glucose_comment").style.backgroundColor = "#D4F8F9";
+                    {{/if}}
+                    {{#if this.weight}}
+                        document.getElementById("weight").value = {{this.weight}};
+                        document.getElementById("weight").readOnly = true;
+                        document.getElementById("weight").style.backgroundColor = "#D4F8F9";
+                        document.getElementById("weight_entered").style.visibility = "visible";
+                        document.getElementById("weight_line").style.visibility = "hidden";
+                        document.getElementById("weight_comment").readOnly = true;
+                        document.getElementById("weight_comment").style.backgroundColor = "#D4F8F9";
+                    {{/if}}
+                    {{#if this.insulin_doses}}
+                        document.getElementById("insulin_doses").value = {{this.insulin_doses}};
+                        document.getElementById("insulin_doses").readOnly = true;
+                        document.getElementById("insulin_doses").style.backgroundColor = "#D4F8F9";
+                        document.getElementById("insulin_doses_entered").style.visibility = "visible";
+                        document.getElementById("insulin_doses_line").style.visibility = "hidden";
+                        document.getElementById("insulin_doses_comment").readOnly = true;
+                        document.getElementById("insulin_doses_comment").style.backgroundColor = "#D4F8F9";
+                    {{/if}}
+                    {{#if this.exercise}}
+                        document.getElementById("exercise").value = {{this.exercise}};
+                        document.getElementById("exercise").readOnly = true;
+                        document.getElementById("exercise").style.backgroundColor = "#D4F8F9";
+                        document.getElementById("exercise_entered").style.visibility = "visible";
+                        document.getElementById("exercise_line").style.visibility = "hidden";
+                        document.getElementById("exercise_comment").readOnly = true;
+                        document.getElementById("exercise_comment").style.backgroundColor = "#D4F8F9";
+                    {{/if}}
+                {{/with}}
+                {{#if no_blood}}    
+                    //document.getElementById("blood_glucose").value = {{this.blood_glucose}};
+                    document.getElementById("blood_glucose").readOnly = true;
+                    document.getElementById("blood_glucose").style.backgroundColor = "#D4F8F9";
+                    document.getElementById("blood_glucose_entered").innerText = "Not Reqd";
+                    document.getElementById("blood_glucose_entered").style.visibility = "visible";
+                    document.getElementById("blood_glucose_line").style.visibility = "hidden";
+                    document.getElementById("blood_glucose_comment").readOnly = true;
+                    document.getElementById("blood_glucose_comment").style.backgroundColor = "#D4F8F9";
+                {{/if}}
+                {{#if no_weight}}
+                    //document.getElementById("weight").value = {{this.weight}};
+                    document.getElementById("weight").readOnly = true;
+                    document.getElementById("weight").style.backgroundColor = "#D4F8F9";
+                    document.getElementById("weight_entered").innerText = "Not Reqd";
+                    document.getElementById("weight_entered").style.visibility = "visible";
+                    document.getElementById("weight_line").style.visibility = "hidden";
+                    document.getElementById("weight_comment").readOnly = true;
+                    document.getElementById("weight_comment").style.backgroundColor = "#D4F8F9";
+                {{/if}}
+                {{#if no_insulin}}
+                    //document.getElementById("insulin_doses").value = {{this.insulin_doses}};
+                    document.getElementById("insulin_doses").readOnly = true;
+                    document.getElementById("insulin_doses").style.backgroundColor = "#D4F8F9";
+                    document.getElementById("insulin_doses_entered").innerText = "Not Reqd";
+                    document.getElementById("insulin_doses_entered").style.visibility = "visible";
+                    document.getElementById("insulin_doses_line").style.visibility = "hidden";
+                    document.getElementById("insulin_doses_comment").readOnly = true;
+                    document.getElementById("insulin_doses_comment").style.backgroundColor = "#D4F8F9";
+                {{/if}}
+                {{#if no_exercise}}
+                    //document.getElementById("exercise").value = {{this.exercise}};
+                    document.getElementById("exercise").readOnly = true;
+                    document.getElementById("exercise").style.backgroundColor = "#D4F8F9";
+                    document.getElementById("exercise_entered").innerText = "Not Reqd";
+                    document.getElementById("exercise_entered").style.visibility = "visible";
+                    document.getElementById("exercise_line").style.visibility = "hidden";
+                    document.getElementById("exercise_comment").readOnly = true;
+                    document.getElementById("exercise_comment").style.backgroundColor = "#D4F8F9";
+                {{/if}}
+            </script>
+            <input type="submit" id="form_submit"/>
+        </form>
+        <form autocomplete="off" action="/main/patientDataRemove" method="POST">
+            <br><br>
+            <p>Made a mistake?  Just press Clear Data to re-enter today's data...</p>
+            <br>
+            <input type="hidden" id="patient_rem_id" name="patient_id" value={{onePatient._id}} />
+            <input type="submit" id="form_submit" value="Clear Data"/>
+        </form>
+        <br>
+    </div>
+    <br>
+    
+    <p style="text-align:center">
+        <a class="heading-link" href="/main/patientDataView">View Health Data</a>
+    </p>
+    <br>
+    <div style="width:90%;margin-left:auto;margin-right:auto">
+        <hr class="link-separator">
+    </div>
+    <br>
+    <p style="text-align:center">  
+        <a class="heading-link" href="/main/accountView">My Account</a>
+    </p>
+    <br>
+    <div style="width:90%;margin-left:auto;margin-right:auto">
+        <hr class="link-separator">
+    </div>
+    <br>
+</div>

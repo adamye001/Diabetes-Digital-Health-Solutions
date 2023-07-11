@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/css/style.css">
+{{#with css}}
+<link rel="stylesheet" href="/css/{{this}}" />
+{{/with}}
+<link rel="shortcut icon" href="/favicon.ico">
+<title>Diabetes @ Home</title>
+</head>
+<body>
+    <header>
+        <h1>Diabetes @ Home</h1>
+    </header>
+    <main>
+        {{{body}}}
+    </main>
+    <footer>
+         <div class="home"><a href="/" class="footer">Home</a></div>
+        <hr style="height:2px;/*border-width:20px;*/background-color:white;" />
+        <div class="home"><a href="/aboutWebsite" class="footer">About This Website</a></div>
+    </footer>
+</body>
+</html>

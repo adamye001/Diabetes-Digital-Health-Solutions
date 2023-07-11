@@ -1,0 +1,29 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "prettier": "prettier --single-quote --no-semi --tab-width 4 --write**/*.js *.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.3",
+    "express-flash": "^0.0.2",
+    "express-handlebars": "^6.0.3",
+    "express-session": "^1.17.2",
+    "express-validator": "^6.14.0",
+    "mongoose": "^6.3.0",
+    "passport": "^0.5.2",
+    "passport-local-mongoose": "^7.0.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.0",
+    "prettier": "^2.6.2"
+  }
+}

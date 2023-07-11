@@ -1,0 +1,41 @@
+<div class="light-page">
+    <br>
+    <h2 style="text-align:left;padding:0%">&nbsp;&nbsp;&nbsp;About Diabetes</h2>
+    <a href="/aboutDiabetes" style="text-decoration: none">
+    <div class = "left-dark-border-image-box">
+        <section>
+            <article>Click to learn more about diabetes.</article>
+            <nav><img id="pointer" src="/media/pointer_icon.png"></nav>
+        </section>
+    </div>
+    </a>
+    <br>
+    <div class = "centre-light-box">
+        <p class="subheading">Login</p><br>
+        <br>
+        <form class="login" action="/login" method="post">
+            <div>
+                <label for="username">Username</label>
+                <input id="username" name="username" type="text" autocomplete="username" required autofocus/>
+            </div>
+            <br>
+            <div>
+                <label for="password">Password&nbsp;</label>
+                <input id="password" name="password" type="password" autocomplete="password" required />
+            </div>
+            <br>
+            <div>
+                <button type="submit" id="form_submit">Log In</button>
+            </div>
+        </form>
+
+        {{#each flash}}
+        <p class="alert">{{this}}</p>
+        {{/each}}
+    </div>
+    <br>
+
+</div>
+
+
+  

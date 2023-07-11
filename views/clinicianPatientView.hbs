@@ -1,0 +1,286 @@
+<div class="light-page">
+    <br> 
+    <section>
+        <article>
+            <div class = "centre-dark-box">
+                <br>
+                <label for="patient_list">My patients&nbsp;</label>
+                <select name="patient_list" id="patient_list" onchange="myFunction(this)" >
+                    <option value = " ">Select One</option>
+                {{#each patients}}
+                    <option value="{{this._id}}">{{this.first_name}} {{this.last_name}}</option>    
+                {{/each}}
+                </select><span class="subheading">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                    Historical health data for patient {{selectpatient.first_name}} {{selectpatient.last_name}} </span>
+                    <a class="go-to-page" href="/main/clinicianConfigurePatient/:0">Go to Configure Patient...</a>
+                <br>
+                <br>
+                <br>
+                <table class="fixed_header">
+                        <thead>
+                        <tr id="patient-table-header">
+                            <th>DATE</th>
+                            <th>BLOOD GLUCOSE</th>
+                            <th>WEIGHT</th>
+                            <th>DOSES</th>
+                            <th>EXERCISE</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {{#each data}}
+                                <tr>
+                                    <td>{{this.local_date}}</td>
+                                    {{#if this.blood_glucose}}
+                                        <td>{{this.blood_glucose}}</td>
+                                    {{else}}
+                                        <td></td>
+                                    {{/if}}
+                                    {{#if this.weight}}
+                                        <td>{{this.weight}}</td>
+                                    {{else}}
+                                        <td></td>
+                                    {{/if}}
+                                    {{#if this.insulin_doses}}
+                                        <td>{{this.insulin_doses}}</td>
+                                    {{else}}
+                                        <td></td>
+                                    {{/if}}
+                                    {{#if this.exercise}}
+                                        <td>{{this.exercise}}</td>
+                                    {{else}}
+                                        <td></td>
+                                    {{/if}}
+                                </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                    <br>
+
+                    <section>
+                        <article id="chart-article">
+                            <canvas id="myChart" style="width:100%;max-width:450px"></canvas>
+                            <script>
+                                const xValues=[];
+                                const yValues=[];
+                                var count = 0;
+                                
+                                {{#each data}}
+                                    {{#if this.blood_glucose}}
+                                        xValues[count]= "{{this.local_date}}";
+                                        yValues[count] = {{this.blood_glucose}}
+                                        count = count + 1;
+                                    {{/if}}
+                                {{/each}}
+
+                                new Chart("myChart", {
+                                type: "line",
+                                data: {
+                                    labels: xValues,
+                                    datasets: [{
+                                    fill: false,
+                                    lineTension: 1,
+                                    backgroundColor: "#14505A",
+                                    borderColor: "#14505A",
+                                    cubicInterpolationMode: "monotone",
+                                    spanGaps:true,
+                                    data: yValues
+                                    }]
+                                },
+                                options: {
+                                    legend: {display: false},
+                                    title: {
+                                        display: true,
+                                        text: "Blood Glucose (mmol/L)",
+                                        fontSize: 16
+                                    }
+                                }
+                                });
+                            </script>
+                        </article>
+                        <nav>
+                            <canvas id="myChart1" style="width:100%;max-width:450px"></canvas>
+                            <script>
+                                const xValuesa=[];
+                                const yValuesa=[];
+                                var count = 0;
+                                
+                                {{#each data}}
+                                    {{#if this.weight}}
+                                        xValuesa[count]= "{{this.local_date}}";
+                                        yValuesa[count] = {{this.weight}}
+                                        count = count + 1;
+                                    {{/if}}
+                                {{/each}}
+
+                                new Chart("myChart1", {
+                                type: "line",
+                                data: {
+                                    labels: xValuesa,
+                                    datasets: [{
+                                    fill: false,
+                                    lineTension: 1,
+                                    backgroundColor: "#14505A",
+                                    borderColor: "#14505A",
+                                    cubicInterpolationMode: "monotone",
+                                    spanGaps:true,
+                                    data: yValuesa
+                                    }]
+                                },
+                                options: {
+                                    legend: {display: false},
+                                    title: {
+                                        display: true,
+                                        text: "Weight (kg)",
+                                        fontSize: 16
+                                    }
+                                }
+                                });
+                            </script>
+                        </nav>
+                    </section>
+
+                    <section>
+                        <article id="chart-article">
+                            <canvas id="myChart2" style="width:100%;max-width:450px"></canvas>
+                            <script>
+                                const xValuesb=[];
+                                const yValuesb=[];
+                                var count = 0;
+                                
+                                {{#each data}}
+                                    {{#if this.insulin_doses}}
+                                        xValuesb[count]= "{{this.local_date}}";
+                                        yValuesb[count] = {{this.insulin_doses}}
+                                        count = count + 1;
+                                    {{/if}}
+                                {{/each}}
+
+                                new Chart("myChart2", {
+                                type: "line",
+                                data: {
+                                    labels: xValuesb,
+                                    datasets: [{
+                                    fill: false,
+                                    lineTension: 1,
+                                    backgroundColor: "#14505A",
+                                    borderColor: "#14505A",
+                                    cubicInterpolationMode: "monotone",
+                                    spanGaps:true,
+                                    data: yValuesb
+                                    }]
+                                },
+                                options: {
+                                    legend: {display: false},
+                                    title: {
+                                        display: true,
+                                        text: "Insulin Doses (number)",
+                                        fontSize: 16
+                                    }
+                                }
+                                });
+                            </script>
+                        </article>
+                        <nav>
+                            <canvas id="myChart3" style="width:100%;max-width:450px"></canvas>
+                            <script>
+                                const xValuesc=[];
+                                const yValuesc=[];
+                                var count = 0;
+                                
+                                {{#each data}}
+                                    {{#if this.exercise}}
+                                        xValuesc[count]= "{{this.local_date}}";
+                                        yValuesc[count] = {{this.exercise}}
+                                        count = count + 1;
+                                    {{/if}}    
+                                {{/each}}
+
+                                new Chart("myChart3", {
+                                type: "line",
+                                data: {
+                                    labels: xValuesc,
+                                    datasets: [{
+                                    fill: false,
+                                    lineTension: 1,
+                                    backgroundColor: "#14505A",
+                                    borderColor: "#14505A",
+                                    cubicInterpolationMode: "monotone",
+                                    spanGaps:true,
+                                    data: yValuesc
+                                    }]
+                                },
+                                options: {
+                                    legend: {display: false},
+                                    title: {
+                                        display: true,
+                                        text: "Exercise (steps)",
+                                        fontSize: 16
+                                    }
+                                }
+                                });
+                            </script>
+                        </nav>
+                    </section>            
+            </div>
+        </article>
+        <nav>
+            <div class = "centre-light-box"><br>
+                <p>Clinician Notes</p><br>
+                <table class="fixed_header">
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Note</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {{#each notes}}
+                                <tr>
+                                <td>{{this.local_date}}</td>
+                                <td>{{this.note}}</td>
+                                </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            <div class = "centre-dark-box">
+                <p>Add a Clinician's Note</p><br>
+                <form autocomplete="off" action="/main/insertClinicianNote" method="POST">
+                    <textarea id="note" name="note" rows="4" cols="40"></textarea>
+                    <br><br>
+                    <input type="submit" id="form_submit"/><br><br>
+                </form>
+            </div>
+            <br>
+            <div class = "centre-light-box">
+                <p>Update the Support Message</p><br>
+                <form autocomplete="off" action="/main/updateSupportMsg" method="POST">
+                    <textarea id="support_msg" name="support_msg" rows="4" cols="40">{{selectpatient.support_msg}}</textarea>
+                    <br><br>
+                    <input type="submit" id="form_submit"/><br><br>
+                </form> 
+            </div>
+        </nav>
+    </section>
+     <script>
+        function myFunction(element) {
+            //element.style.color = 'red';
+            var option_value = element.options[element.selectedIndex].value;
+            var option_text = element.options[element.selectedIndex].text;
+            //alert('The option value is "' + option_value + '"\nand the text is "' + option_text + '"');
+            document.getElementById("cur_patient_id").value = option_value;
+            if (option_value != ' ') {
+                document.forms['form_id'].submit();
+            }
+        }
+    </script>
+
+    <form autocomplete="off" id="form_id" action="/main/viewPatient" method="POST" style="display:none" >
+        <br><br>
+        <p>Selected patient</p>
+        <br>
+        <input type="text" id="cur_patient_id" name="cur_patient_id"/>
+        <input type="submit" id="form_submit" value="Select"/>
+    </form>
+</div>
+

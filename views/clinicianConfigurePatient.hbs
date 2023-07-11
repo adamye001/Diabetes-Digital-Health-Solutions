@@ -1,0 +1,163 @@
+<div class="light-page">
+<br>
+
+<section>
+    <article>
+        <div class = "centre-dark-box">
+            <h2 style="padding:0%">Patient Details {{#if selected_patient_user.patient_id.first_name}}for {{selected_patient_user.patient_id.first_name}} {{selected_patient_user.patient_id.last_name}} {{/if}}</h2>
+            <form autocomplete="off" action="/main/insertNewPatient" method="POST">
+                <input type="hidden" id="clinician_id" name="clinician_id" value={{clinician_id}} />
+                <table>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>Username (email)&nbsp;</td>
+                        <td><input type="text" id="username" name="username" required value="{{selected_patient_user.username}}"/></td>
+                    </tr>
+                    <tr>
+                        <td>First name</td>
+                        <td><input type="text" id="first_name" name="first_name" required value="{{selected_patient_user.patient_id.first_name}}"/></td>
+                    </tr>
+                    <tr>
+                        <td>Last name</td>
+                        <td><input type="text" id="last_name" name="last_name" required  value="{{selected_patient_user.patient_id.last_name}}"/></td>
+                    </tr>
+                    <tr>
+                        <td>Screen name</td>
+                        <td><input type="text" id="displayname" name="displayname" required value="{{selected_patient_user.displayname}}"/></td>
+                    </tr>
+                    <tr>
+                        <td>Year of birth</td>
+                        <td><input type="number" id="yearofbirth" name="yearofbirth" min="1900"  value="{{selected_patient_user.yearofbirth}}"/></td>
+                    </tr>
+                    <tr>
+                        <td>Patient bio</td>
+                        <td><textarea id="textbio" name="textbio" rows="3" cols="75">{{selected_patient_user.textbio}}</textarea></td>
+                    </tr>
+                    <tr><td><br/></td></tr>                
+                </table>
+                <p>Health Data Parameters</p><br>
+                <table class="fixed_header">
+                    <thead>
+                    <tr>
+                        <th>HEALTH ITEM</th>
+                        <th>REQUIRED?</th>
+                        <th>LOWER BOUND</th>
+                        <th>UPPER BOUND</th>
+                        <th>UNITS</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Blood Glucose</td>
+                            <td><input type="checkbox" id="blood_glucose_reqd" name="blood_glucose_reqd"/></td> 
+                            <td><input type="number" id="blood_glucose_lower" name="blood_glucose_lower" min="0" max="200" step="any"  value="{{selected_patient_user.patient_id.blood_glucose_lower}}"/></td>
+                            <td><input type="number" id="blood_glucose_upper" name="blood_glucose_upper" min="0" max="200" step="any" value="{{selected_patient_user.patient_id.blood_glucose_upper}}"/></td>
+                            <td>mmol/L</td>
+                        </tr>
+                        <tr>
+                            <td>Weight</td>
+                            <!-- <td><input type="checkbox" id="weight_reqd" name="weight_reqd" value="{{selected_patient_user.patient_id.weight_reqd}}"/></td> -->
+                            <td><input type="checkbox" id="weight_reqd" name="weight_reqd"/></td>
+                            <td><input type="number" id="weight_lower" name="weight_lower" min="0" max="700" step="any"  value="{{selected_patient_user.patient_id.weight_lower}}"/></td>
+                            <td><input type="number" id="weight_upper" name="weight_upper" min="0" max="700" step="any" value="{{selected_patient_user.patient_id.weight_upper}}"/></td>
+                            <td>Kg</td>
+                        </tr>
+                        <tr>
+                            <td>Insulin Doses</td>
+                            <td><input type="checkbox" id="insulin_doses_reqd" name="insulin_doses_reqd"/></td>
+                            <td><input type="number" id="insulin_doses_lower" name="insulin_doses_lower" min="0" value="{{selected_patient_user.patient_id.insulin_doses_lower}}"/></td>
+                            <td><input type="number" id="insulin_doses_upper" name="insulin_doses_upper" min="0" value="{{selected_patient_user.patient_id.insulin_doses_upper}}"/></td>
+                            <td>Num doses</td>
+                        </tr>
+                        <tr>
+                            <td>Exercise</td>
+                            <td><input type="checkbox" id="exercise_reqd" name="exercise_reqd"/></td>
+                            <td><input type="number" id="exercise_lower" name="exercise_lower" min="0" value="{{selected_patient_user.patient_id.exercise_lower}}"/></td>
+                            <td><input type="number" id="exercise_upper" name="exercise_upper" min="0" value="{{selected_patient_user.patient_id.exercise_upper}}"/></td>
+                            <td>Step count</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <script>
+                {{#with selected_patient_user.patient_id}}
+                    {{#if this.blood_glucose_reqd}}
+                        document.getElementById("blood_glucose_reqd").checked = true;
+                    {{/if}}
+                    {{#if this.weight_reqd}}
+                        document.getElementById("weight_reqd").checked = true;
+                    {{/if}}
+                    {{#if this.insulin_doses_reqd}}
+                        document.getElementById("insulin_doses_reqd").checked = true;
+                    {{/if}}
+                    {{#if this.exercise_reqd}}
+                        document.getElementById("exercise_reqd").checked = true;
+                    {{/if}}
+                {{/with}}
+            </script>
+                <input type="submit" id="form_submit" value="Add Patient"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="submit" id="form_submit" value="Update Patient" formaction="/main/updatePatient" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="submit" id="form_submit" value="Clear Form" formnovalidate="formnovalidate" formaction="/main/clearForm" />
+            </form>
+        </div>
+    </article>
+
+    <nav>
+        <div class = "centre-light-box"><br>
+            <p>My Patients (click a patient to load their details)</p><br>
+            <table class="fixed_header">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                </tr>
+                </thead>
+                <tbody style="height:400px">
+                    {{#each patients}}
+                        <tr style="cursor:pointer" onclick="myFunction(this, '{{this._id}}')"> 
+                        <td>{{this.first_name}} {{this.last_name}}</td>    
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            <script>
+                function myFunction(element, id) {
+                    element.style.color = 'red';
+                    document.getElementById("cur_patient_id").value = id;
+                    document.forms['form_id'].submit();
+                }
+            </script>
+
+            <form autocomplete="off" id="form_id" action="/main/setCurPatient" method="POST" style="display:none">
+                <br><br>
+                <p>Selected patient</p>
+                <br>
+                <input type="text" id="cur_patient_id" name="cur_patient_id"/>
+                <input type="submit" id="form_submit" value="Select"/>
+            </form>
+        </div>
+        {{#if messages.error}}
+            <div class = "error-box">
+                <br>
+                <p> <span class="subheading">Database Message</span><br></p>
+                <br>
+                <h1 class = "error">{{messages.error}}</h1>
+                <br>
+            </div>
+        {{/if}}   
+        {{#if messages.success}}
+            <div class = "success-box">
+                <br>
+                <p> <span class="subheading">Database Message</span><br></p>
+                <br>
+                <h1 class = "success">{{messages.success}}</h1>
+                <br>
+            </div>
+        {{/if}}   
+    </nav>
+</section>
+
+</div>
+
+

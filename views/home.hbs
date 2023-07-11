@@ -1,0 +1,96 @@
+{{#if mode}}
+<div class="light-page" style = "background-color: #071e22">
+{{else}}
+<div class="light-page">
+{{/if}}
+    <br>
+    <h2 style="text-align:left;padding:0%">&nbsp;&nbsp;&nbsp;About Diabetes</h2>
+    <a href="/aboutDiabetes" style="text-decoration: none">
+    {{#if mode}}
+    <div class = "left-dark-border-image-box" style = "background-color: #071e22">
+    {{else}}
+    <div class = "left-dark-border-image-box">
+    {{/if}}
+        <section>
+            <article>Click to learn more about diabetes.</article>
+            <nav><img id="pointer" src="/media/pointer_icon.png"></nav>
+        </section>
+    </div>
+    </a>
+    <br>
+    <div class = "centre-light-box">
+        <p class="subheading" style="text-align:center">This is {{screenName}}'s Home Page.  Please select from the below menu options...</p> 
+        <br>
+        <form class="logout" action="/logout" method="post" style="text-align:right">
+            <button type="submit" id="form_submit">Log Out</button>
+        </form> 
+    </div>
+    <br>
+
+    {{#if patId}}
+        <p style="text-align:center">
+            <a class="heading-link" href="/main/patientDataEntry">Enter Health Data</a>
+        </p>
+        <br>
+        <div style="width:90%;margin-left:auto;margin-right:auto">
+            <hr class="link-separator">
+        </div>
+        <br>
+        <p style="text-align:center">  
+            <a class="heading-link" href="/main/patientDataView">View Health Data</a>
+        </p>
+        <br>
+        <div style="width:90%;margin-left:auto;margin-right:auto">
+            <hr class="link-separator">
+        </div>
+        <br>
+    {{else}}
+        {{#if clinId}}
+            <p style="text-align:center">
+                <a class="heading-link" href="/main/clinicianDashboard">Clinician Dashboard</a>
+            </p>
+            <br>
+            <div style="width:90%;margin-left:auto;margin-right:auto">
+                <hr class="link-separator">
+            </div>
+            <br>
+            <p style="text-align:center">  
+                <a class="heading-link" href="/main/clinicianPatientView">View a Patient's Detailed Health Data</a>
+            </p>
+            <br>
+            <div style="width:90%;margin-left:auto;margin-right:auto">
+                <hr class="link-separator">
+            </div>
+            <br>
+            <p style="text-align:center">  
+                <a class="heading-link" href="/main/clinicianConfigurePatient/:0">Add Patients or Configure Existing</a>
+            </p>
+            <br>
+            <div style="width:90%;margin-left:auto;margin-right:auto">
+                <hr class="link-separator">
+            </div>
+            <br>
+        {{else}}
+            <p style="text-align:center">
+                <a class="heading-link" href="/main/adminConfigureClinician">Add a New Clinician</a>
+            </p>
+            <br>
+            <div style="width:90%;margin-left:auto;margin-right:auto">
+                <hr class="link-separator">
+            </div>
+            <br>
+        {{/if}}
+    {{/if}}
+
+    <p style="text-align:center">  
+        <a class="heading-link" href="/main/accountView">My Account</a>
+    </p>
+    <br>
+    <div style="width:90%;margin-left:auto;margin-right:auto">
+        <hr class="link-separator">
+    </div>
+    <br>
+</div>
+
+
+  

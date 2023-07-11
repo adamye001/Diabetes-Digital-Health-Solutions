@@ -1,0 +1,118 @@
+<div class="light-page">
+    <br>
+    <h2>Account Management Page</h2>
+    <div class = "centre-dark-box">
+        <p class="subheading">Account Details</p>  
+        <br>
+        <table>
+            <tr>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr>
+                <td>Username (email)&nbsp;</td>
+                <td>{{user.username}}</td>
+            </tr>
+            <tr>
+                <td>First name</td>
+                <td>
+                    {{#if user.patient_id}}
+                        {{user.patient_id.first_name}}
+                    {{else}}
+                        {{user.clinician_id.first_name}}
+                    {{/if}}
+                </td>
+            </tr>
+            <tr>
+                <td>Last name</td>
+                <td>
+                    {{#if user.patient_id}}
+                        {{user.patient_id.last_name}}
+                    {{else}}
+                        {{user.clinician_id.last_name}}
+                    {{/if}}
+                </td>
+            </tr>
+            <tr>
+                <td>Screen name</td>
+                <td>{{user.displayname}}</td>
+            </tr>
+            <tr>
+                <td>Year of birth</td>
+                <td>{{user.yearofbirth}}</td>
+            </tr>
+            <tr><td><br/></td></tr>                
+        </table>
+        <br>            
+    </div>
+
+    <script type="text/javascript" language="JavaScript">
+        function checkPassword(theForm) {
+            if (theForm.password.value != theForm.pword2.value)
+            {
+                alert('Entries must match');
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script> 
+
+    <div class = "centre-light-box">
+        <p class="subheading">Change my password</p>  
+        <br>
+        <form action="/changePassword" method="post" onsubmit="return checkPassword(this);">
+            <div>
+                <label for="password">New password</label>
+                <input id="password1" name="password" type="password" autocomplete="password" required minlength="8" />
+            </div>
+            <br>
+             <div>
+                <label for="password">Confirmation&nbsp;&nbsp;</label>
+                <input id="password2" name="pword2" type="password" autocomplete="password" required minlength="8" />
+            </div>
+            <br>
+            <div>
+                <button type="submit" id="form_submit">Change Password</button>
+            </div>
+        </form>
+        {{#if messages.success}}
+        <h1 class = "success">{{messages.success}}</h1>
+        {{/if}}
+        {{#if messages.error}}
+        <h1 class = "error">{{messages.error}}</h1>
+        {{/if}}
+    </div>
+    {{#if user.patient_id}}
+    <div class = "centre-light-box">
+        <p class="subheading">Choose colour scheme</p>  
+        <label for="colour_scheme">Colour scheme&nbsp;</label>
+        <select name="colour_scheme" id="colour_scheme" onchange="myFunction(this)" >
+            <option value = " ">Select One</option>
+            <option value = "Light">Light</option>
+            <option value = "Dark">Dark</option>
+        </select>
+    </div>
+    <br>
+     <script>
+        function myFunction(element) {
+            //element.style.color = 'red';
+            var option_value = element.options[element.selectedIndex].value;
+            var option_text = element.options[element.selectedIndex].text;
+            // alert('The option value is "' + option_value + '"\nand the text is "' + option_text + '"');
+            document.getElementById("cur_colour_scheme").value = option_value;
+            if (option_value != ' ') {
+                document.forms['form_id'].submit();
+            }
+        }
+    </script>
+
+    <form autocomplete="off" id="form_id" action="/main/setColourMode" method="POST" style="display:none" >
+        <br><br>
+        <p>Selected colour scheme</p>
+        <br>
+        <input type="text" id="cur_colour_scheme" name="cur_colour_scheme"/>
+        <input type="submit" id="form_submit" value="Select"/>
+    </form>
+     {{/if}}
+</div>

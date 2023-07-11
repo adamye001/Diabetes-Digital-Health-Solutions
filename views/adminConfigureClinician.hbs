@@ -1,0 +1,52 @@
+<div class="light-page">
+    <br>
+    <h2>Admin Page</h2>
+    <div class = "centre-dark-box">
+        <p class="subheading">Add a new Clinician</p>  
+
+        <form autocomplete="off" action="/main/adminConfigureClinician" method="POST">
+            <table>
+                <tr>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>Username (email)&nbsp;</td>
+                    <td><input type="text" id="username" name="username" required/></td>
+                </tr>
+                <tr>
+                    <td>First name</td>
+                    <td><input type="text" id="first_name" name="first_name" required/></td>
+                </tr>
+                <tr>
+                    <td>Last name</td>
+                    <td><input type="text" id="last_name" name="last_name" required/></td>
+                </tr>
+                <tr>
+                    <td>Screen name</td>
+                    <td><input type="text" id="displayname" name="displayname" required/></td>
+                </tr>
+                <tr>
+                    <td>Year of birth</td>
+                    <td><input type="number" id="yearofbirth" name="yearofbirth" min="1900" /></td>
+                </tr>
+                <tr>
+                    <td>Clinician bio</td>
+                    <td><textarea id="textbio" name="textbio" rows="3" cols="50"></textarea></td>
+                </tr>
+                <tr><td><br/></td></tr>                
+            </table>
+            <input type="submit" id="form_submit"/>
+        </form>
+
+    </div>
+
+    <div class = "centre-light-box">
+        <p class="subheading"></p>  
+        <br>
+    </div>
+    <div class = "centre-light-box">
+         <p class="subheading"></p>  
+    </div>
+    <br>
+</div>

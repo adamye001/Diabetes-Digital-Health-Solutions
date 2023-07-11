@@ -1,0 +1,426 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+}
+
+header{
+    background-color: #16C2D5;
+}
+
+main{
+    background-color: #D4F8F9;
+}
+
+main.websites{
+    background-color: white;
+}
+
+footer{
+    background-color: #14505A;
+    text-align: center;
+}
+
+.footer{
+    color: white;
+}
+
+h1{
+    text-align: center;
+    color: white;
+    padding: 1%;;
+}
+
+h2{
+    text-align: center;
+    color: #3DC2D5;
+    padding: 1.5%
+}
+
+#symptoms-causes{
+    width: 50%;
+    height: auto;
+    border-radius: 15px;
+    text-align: left;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 1.5%;
+    margin-bottom: 3%;
+    padding: 2%;
+    background-color: white;
+}
+
+li{
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#row1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5%;
+}
+
+#diabetes{
+    width: 50%;
+    height: auto;
+    border-radius: 15px;
+    text-align: left;
+    margin-right: 10px;
+    padding: 2%;
+    background-color: white;
+}
+
+#diabetes-and-healthy-pic{
+    display: block;
+    width: 30%;
+    min-width: 160px;
+    max-width: 355px;
+    border-radius: 15px;
+}
+
+#risk{
+    width: 50%;
+    height: auto;
+    text-align: left;
+    padding: 1.5%;
+    background-color: white;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+#prevent{
+    width: 50%;
+    height: auto;
+    text-align: right;
+    margin-left: 47%;
+    padding: 1.5%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    background-color: white;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+#diabetes-video-p{
+    text-align: center;
+}
+
+#diabetes-video{
+    width: 60%;
+    border:6px #3DC2D5 solid;
+    border-radius: 10px;
+}
+
+
+p{
+    color: #14505A;
+}
+
+#further-reading{
+    width: 90%;
+    height: auto;
+    border: 1.5%;
+    text-align: center;
+    margin:auto;
+    padding: 1.5%;
+}
+
+
+.about-website{
+    width: auto;
+    border-radius: 10px;
+    background-color: #8BE3D9;
+    text-align: left;
+    margin-right: 10%;
+    margin-left:10%;
+    margin-bottom: auto;
+    padding: 2%;
+}
+
+.left-dark-box{
+    width: 30%;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background-color: #8BE3D9;
+    text-align: left;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    padding: 2%;
+}
+
+.left-dark-border-image-box{
+    width: 30%;
+    border:8px #298ca3 solid;
+    border-left: 0;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background-color: #8BE3D9;
+    text-align: left;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    padding: 2%;
+    background-color: white;
+    color:#298ca3;
+}
+
+#website-author{
+    text-align: left;
+    margin-right: auto;
+    margin-bottom: auto;
+    padding-top: 20%;
+    padding-left: 2%;
+    padding-bottom: 2%;
+    padding-right: auto;
+}
+
+.home{
+    border-bottom: 1px white;
+    padding-top: 1.5%;
+    padding-bottom: 1.5%;
+}
+
+.subheading{
+    font-size: larger; 
+    color: #14505A; 
+    font-weight: bold; 
+    font-style: italic;
+}
+
+.light-page{
+    background-color: white;
+}
+
+.centre-light-box{
+    width: 90%;
+    height: auto;
+    border-radius: 15px;
+    text-align: left;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 0%;
+    margin-bottom: 2%;
+    padding: 2%;
+    background-color: #D4F8F9;
+}
+
+.centre-dark-border-box{
+    width: 90%;
+    height: auto;
+    border:6px #8BE3D9 solid;
+    border-radius: 15px;
+    text-align: left;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 0%;
+    margin-bottom: 2%;
+    padding: 2%;
+    background-color: white;
+}
+
+.centre-dark-box{
+    width: 90%;
+    height: auto;
+    border-radius: 15px;
+    text-align: left;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 0%;
+    margin-bottom: 2%;
+    padding: 2%;
+    background-color: #8BE3D9;
+}
+
+#form_submit {
+    background: #0066A2;
+    color: white;
+    border-style: outset;
+    border-color: #0066A2;
+    border-radius: 5px;
+    height: 45px;
+    width: 100px;
+    font: bold15px arial,sans-serif;
+    text-shadow: none;
+}
+
+.date-display{
+    color: black;
+    font-size: 14pt;
+    text-align: left;
+}
+
+.page-heading{
+    text-align: center;
+    font-size: 24pt;
+    color: #3DC2D5;
+}
+
+.table-header{
+    background-color: whitesmoke;
+    color: #14505A;
+    height: 24pt;
+}
+
+/* Container for flexboxes */
+section {
+    display: -webkit-flex;
+    display: flex;
+}
+  
+/* Style the navigation menu */
+nav {
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+  
+/* Style the content */
+article {
+    -webkit-flex: 3;
+    -ms-flex: 3;
+    flex: 3;
+}
+  
+/* Style the content */
+#chart-article {
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+
+/* Responsive layout - makes the menu and the content (inside the section) sit on top of each other instead of next to each other */
+@media (max-width: 1000px) {
+    section {
+      -webkit-flex-direction: column;
+      flex-direction: column;
+    }
+}
+
+/* If the screen size is 600px wide or less, set the font-size of <div> to 10pt */
+@media screen and (max-width: 500px) {
+    #patient-table-header {
+      font-size: 10pt;
+    }
+  }
+
+.fixed_header{
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.fixed_header tbody{
+  display:block;
+  width: 100%;
+  overflow: auto;
+  height: 300px;
+}
+
+.fixed_header thead tr {
+   display: block;
+}
+
+.fixed_header thead {
+  background: whitesmoke;
+  color:#14505A;
+}
+
+.fixed_header th, .fixed_header td {
+  padding: 5px;
+  text-align: left;
+  width: 200px;
+}
+
+#pointer {
+    width: 100%;
+}
+
+.heading-link{
+    font-size: larger; 
+    color: #14505A; 
+    font-weight: bold; 
+    font-style: italic;
+    text-decoration: none;
+}
+
+.link-separator{
+    height:2px;
+    background-color:lightgrey;
+}
+
+.centre-light-box-border{
+    width: 90%;
+    height: auto;
+    border-radius: 15px;
+    text-align: left;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 0%;
+    margin-bottom: 2%;
+    background-color: #D4F8F9;
+    border:6px #3DC2D5 solid;
+    padding:0.5%;
+}
+
+.go-to-page {
+    text-align: right;
+    float: right;
+    background: #0066A2;
+    color: white;
+    border-style: outset;
+    border-color: #0066A2;
+    border-radius: 5px;
+    height: 15px;
+    width: 180px;
+    text-decoration: none;
+    padding: 15px 25px;
+    font: bold15px arial,sans-serif;
+    text-shadow: none;
+}
+
+.badge_center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+}
+
+.error {
+    color: crimson;
+}
+
+.success {
+    color: lightseagreen;
+}
+
+.error-box {
+    width: 90%;
+    height: auto;
+    border:8px crimson solid;
+    border-radius: 15px;
+    text-align: left;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 0%;
+    margin-bottom: 2%;
+    padding: 2%;
+}
+
+.success-box {
+    width: 90%;
+    height: auto;
+    border:8px lightseagreen solid;
+    border-radius: 15px;
+    text-align: left;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 0%;
+    margin-bottom: 2%;
+    padding: 2%;
+}

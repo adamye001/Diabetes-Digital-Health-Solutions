@@ -1,0 +1,191 @@
+<div class="light-page">
+<br>
+
+<section>
+  <article>
+        <div class = "centre-dark-border-box">
+            <h2 style="padding:0%">Patient Overview</h2>
+            <p id="local_date_str"></p><br>
+            <script>
+                var today = new Date();
+                var date = today.getDay()+', '+today.getDate()+' '+(today.getMonth()+1)+' '+today.getFullYear();
+                // want local date as ddmmyyyy
+                var local_date = ''+("0" + today.getDate()).slice(-2)+("0" + (today.getMonth() + 1)).slice(-2)+today.getFullYear();
+                document.getElementById("local_date_str").innerHTML = today.toDateString();
+            </script>
+            <table class="fixed_header">
+                <thead>
+                <tr>
+                    <th>PATIENT</th>
+                    <th>BLOOD GLUCOSE</th>
+                    <th>WEIGHT</th>
+                    <th>DOSES</th>
+                    <th>EXERCISE</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {{#each data}}
+                        <tr style="cursor:pointer" onclick="myFunctionTable(this, '{{this.patient_id._id}}')">
+                        <td>{{this.patient_id.first_name}} {{this.patient_id.last_name}}</td>
+
+                        {{#if this.patient_id.blood_glucose_reqd}}
+                            {{#if this.blood_glucose}}
+                                {{#gt this.blood_glucose this.patient_id.blood_glucose_upper}}
+                                    <td style="background-color:lightcoral">{{this.blood_glucose}}</td>   
+                                {{else}} 
+                                    {{#lt this.blood_glucose this.patient_id.blood_glucose_lower}}
+                                        <td style="background-color:lightblue">{{this.blood_glucose}}</td>
+                                    {{else}}
+                                            <td>{{this.blood_glucose}}</td>
+                                    {{/lt}}        
+                                {{/gt}}
+                            {{else}}
+                                <td></td>
+                            {{/if}}
+                        {{else}}
+                            <td style="background-color:lightgrey">{{this.blood_glucose}}</td>
+                         {{/if}}
+                        {{#if this.patient_id.weight_reqd}}
+                            {{#if this.weight}}
+                                {{#gt this.weight this.patient_id.weight_upper}}
+                                    <td style="background-color:lightcoral">{{this.weight}}</td>   
+                                {{else}} 
+                                    {{#lt this.weight this.patient_id.weight_lower}}
+                                        <td style="background-color:lightblue">{{this.weight}}</td>
+                                    {{else}}
+                                            <td>{{this.weight}}</td>
+                                    {{/lt}}        
+                                {{/gt}}
+                            {{else}}
+                                <td></td>
+                            {{/if}}
+                        {{else}}
+                            <td style="background-color:lightgrey">{{this.weight}}</td>
+                        {{/if}}   
+                        {{#if this.patient_id.insulin_doses_reqd}}  
+                            {{#if this.insulin_doses}}
+                                {{#gt this.insulin_doses this.patient_id.insulin_doses_upper}}
+                                    <td style="background-color:lightcoral">{{this.insulin_doses}}</td>   
+                                {{else}} 
+                                    {{#lt this.insulin_doses this.patient_id.insulin_doses_lower}}
+                                        <td style="background-color:lightblue">{{this.insulin_doses}}</td>
+                                    {{else}}
+                                            <td>{{this.insulin_doses}}</td>
+                                    {{/lt}}        
+                                {{/gt}}
+                            {{else}}
+                                <td></td>
+                            {{/if}}
+                        {{else}}
+                            <td style="background-color:lightgrey">{{this.insulin_doses}}</td>
+                        {{/if}}  
+                        {{#if this.patient_id.exercise_reqd}} 
+                            {{#if this.exercise}}
+                                {{#gt this.exercise this.patient_id.exercise_upper}}
+                                    <td style="background-color:lightcoral">{{this.exercise}}</td>   
+                                {{else}} 
+                                    {{#lt this.exercise this.patient_id.exercise_lower}}
+                                        <td style="background-color:lightblue">{{this.exercise}}</td>
+                                    {{else}}
+                                            <td>{{this.exercise}}</td>
+                                    {{/lt}}        
+                                {{/gt}}
+                            {{else}}
+                                <td></td>
+                            {{/if}}
+                        {{else}}
+                            <td style="background-color:lightgrey">{{this.exercise}}</td>
+                        {{/if}}     
+                        </tr>
+                    {{/each}}
+                    {{#each otherPat}}
+                        <tr style="cursor:pointer" onclick="myFunctionTable(this, '{{this._id}}')">
+                        <td>{{this.first_name}} {{this.last_name}}</td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            <br>
+            <p>Key:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Too High:&nbsp;
+                <span style="background-color:lightcoral">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </span>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Too Low:&nbsp;
+                <span style="background-color:lightblue">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </span>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Not Required:&nbsp;
+                <span style="background-color:lightgrey">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </span>
+            </p>
+        </div>
+  </article>
+
+  <nav>
+       <div class = "centre-light-box"><br>
+             <p>Recent Patient Comments</p><br>
+            <table class="fixed_header">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Comment</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {{#each data}}
+                        {{#if this.blood_glucose_comment}}
+                            <tr style="cursor:pointer" onclick="myFunctionTable(this, '{{this.patient_id._id}}')">
+                            <td>{{this.patient_id.first_name}} {{this.patient_id.last_name}}</td>
+                            <td>{{this.local_date}}</td>
+                            <td>{{this.blood_glucose_comment}}</td>
+                            </tr>
+                        {{/if}}
+                        {{#if this.weight_comment}}
+                            <tr style="cursor:pointer" onclick="myFunctionTable(this, '{{this.patient_id._id}}')">
+                            <td>{{this.patient_id.first_name}} {{this.patient_id.last_name}}</td>
+                            <td>{{this.local_date}}</td>
+                            <td>{{this.weight_comment}}</td>
+                            </tr>
+                        {{/if}}
+                        {{#if this.insulin_doses_comment}}
+                            <tr style="cursor:pointer" onclick="myFunctionTable(this, '{{this.patient_id._id}}')">
+                            <td>{{this.patient_id.first_name}} {{this.patient_id.last_name}}</td>
+                            <td>{{this.local_date}}</td>
+                            <td>{{this.insulin_doses_comment}}</td>
+                            </tr>
+                        {{/if}}
+                        {{#if this.exercise_comment}}
+                            <tr style="cursor:pointer" onclick="myFunctionTable(this, '{{this.patient_id._id}}')">
+                            <td>{{this.patient_id.first_name}} {{this.patient_id.last_name}}</td>
+                            <td>{{this.local_date}}</td>
+                            <td>{{this.exercise_comment}}</td>
+                            </tr>
+                        {{/if}}
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+  </nav>
+</section>
+
+    <script>
+        function myFunctionTable(element, id) {
+            // element.style.background = "#0066A2";
+            document.getElementById("cur_patient_id").value = id;
+            document.forms['form_id'].submit();
+        }
+    </script>
+
+    <form autocomplete="off" id="form_id" action="/main/viewPatient" method="POST" style="display:none">
+        <br><br>
+        <p>Selected patient</p>
+        <br>
+        <input type="text" id="cur_patient_id" name="cur_patient_id"/>
+        <input type="submit" id="form_submit" value="Select"/>
+    </form>
+
+</div>
+
+

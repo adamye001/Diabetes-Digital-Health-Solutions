@@ -1,0 +1,275 @@
+<div class="light-page">
+    <br>
+    <div class = "centre-dark-box">
+        <p class="subheading">My Health History</p>  
+        <br>
+           <table class="fixed_header">
+                <thead>
+                <tr id="patient-table-header">
+                    <th>DATE</th>
+                    <th>BLOOD GLUCOSE</th>
+                    <th>WEIGHT</th>
+                    <th>DOSES</th>
+                    <th>EXERCISE</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {{#each data}}
+                        <tr>
+                            <td>{{this.local_date}}</td>
+                            {{#if this.blood_glucose}}
+                                <td>{{this.blood_glucose}}</td>
+                            {{else}}
+                                <td></td>
+                            {{/if}}
+                            {{#if this.weight}}
+                                <td>{{this.weight}}</td>
+                            {{else}}
+                                <td></td>
+                            {{/if}}
+                            {{#if this.insulin_doses}}
+                                <td>{{this.insulin_doses}}</td>
+                            {{else}}
+                                <td></td>
+                            {{/if}}
+                            {{#if this.exercise}}
+                                <td>{{this.exercise}}</td>
+                            {{else}}
+                                <td></td>
+                            {{/if}}
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            <br>
+
+            <section>
+                <article id="chart-article">
+                    <canvas id="myChart" style="width:100%;max-width:450px"></canvas>
+                    <script>
+                        const xValues=[];
+                        const yValues=[];
+                        var count = 0;
+                        
+                        {{#each data}}
+                            {{#if this.blood_glucose}}
+                                xValues[count]= "{{this.local_date}}";
+                                yValues[count] = {{this.blood_glucose}}
+                                count = count + 1;
+                            {{/if}}
+                        {{/each}}
+
+                        new Chart("myChart", {
+                        type: "line",
+                        data: {
+                            labels: xValues,
+                            datasets: [{
+                            fill: false,
+                            lineTension: 1,
+                            backgroundColor: "#14505A",
+                            borderColor: "#14505A",
+                            cubicInterpolationMode: "monotone",
+                            spanGaps:true,
+                            data: yValues
+                            }]
+                        },
+                        options: {
+                            legend: {display: false},
+                            title: {
+                                display: true,
+                                text: "Blood Glucose (mmol/L)",
+                                fontSize: 16
+                            }
+                        }
+                        });
+                    </script>
+                </article>
+                <nav>
+                    <canvas id="myChart1" style="width:100%;max-width:450px"></canvas>
+                    <script>
+                        const xValuesa=[];
+                        const yValuesa=[];
+                        var count = 0;
+                        
+                        {{#each data}}
+                            {{#if this.weight}}
+                                xValuesa[count]= "{{this.local_date}}";
+                                yValuesa[count] = {{this.weight}}
+                                count = count + 1;
+                            {{/if}}
+                        {{/each}}
+                        
+                        /*
+                        var xValuesa=[{{#each data}}
+                            {{#if this.weight}}
+                                 "{{this.local_date}}",
+                            {{/if}}
+                        {{/each}}]
+
+                        var yValuesa=[{{#each data}}
+                            {{#if this.weight}}
+                                 {{this.weight}},
+                            {{/if}}
+                        {{/each}}]
+                        */
+
+                        new Chart("myChart1", {
+                        type: "line",
+                        data: {
+                            labels: xValuesa,
+                            datasets: [{
+                            fill: false,
+                            lineTension: 1,
+                            backgroundColor: "#14505A",
+                            borderColor: "#14505A",
+                            cubicInterpolationMode: "monotone",
+                            spanGaps:true,
+                            data: yValuesa
+                            }]
+                        },
+                        options: {
+                            legend: {display: false},
+                            title: {
+                                display: true,
+                                text: "Weight (kg)",
+                                fontSize: 16
+                            }
+                        }
+                        });
+                    </script>
+                </nav>
+            </section>
+
+            <section>
+                <article id="chart-article">
+                    <canvas id="myChart2" style="width:100%;max-width:450px"></canvas>
+                    <script>
+                        const xValuesb=[];
+                        const yValuesb=[];
+                        var count = 0;
+                        
+                        {{#each data}}
+                            {{#if this.insulin_doses}}
+                                xValuesb[count]= "{{this.local_date}}";
+                                yValuesb[count] = {{this.insulin_doses}}
+                                count = count + 1;
+                            {{/if}}
+                        {{/each}}
+
+                        new Chart("myChart2", {
+                        type: "line",
+                        data: {
+                            labels: xValuesb,
+                            datasets: [{
+                            fill: false,
+                            lineTension: 1,
+                            backgroundColor: "#14505A",
+                            borderColor: "#14505A",
+                            cubicInterpolationMode: "monotone",
+                            spanGaps:true,
+                            data: yValuesb
+                            }]
+                        },
+                        options: {
+                            legend: {display: false},
+                            title: {
+                                display: true,
+                                text: "Insulin Doses (number)",
+                                fontSize: 16
+                            }
+                        }
+                        });
+                    </script>
+                </article>
+                <nav>
+                    <canvas id="myChart3" style="width:100%;max-width:450px"></canvas>
+                    <script>
+                        const xValuesc=[];
+                        const yValuesc=[];
+                        var count = 0;
+                        
+                        {{#each data}}
+                            {{#if this.exercise}}
+                                xValuesc[count]= "{{this.local_date}}";
+                                yValuesc[count] = {{this.exercise}}
+                                count = count + 1;
+                            {{/if}}    
+                        {{/each}}
+
+                        new Chart("myChart3", {
+                        type: "line",
+                        data: {
+                            labels: xValuesc,
+                            datasets: [{
+                            fill: false,
+                            lineTension: 1,
+                            backgroundColor: "#14505A",
+                            borderColor: "#14505A",
+                            cubicInterpolationMode: "monotone",
+                            spanGaps:true,
+                            data: yValuesc
+                            }]
+                        },
+                        options: {
+                            legend: {display: false},
+                            title: {
+                                display: true,
+                                text: "Exercise (steps)",
+                                fontSize: 16
+                            }
+                        }
+                        });
+                    </script>
+                </nav>
+            </section>            
+    </div>
+    <div class = "centre-light-box-border">
+        <p class="subheading" style="text-align:center">A message from your doctor...</p>
+        <h2>{{patient.support_msg}}</h2>
+    </div>
+    <h2 style="padding: 0%">Your engagement rate is {{patient.engagement_rate}}%</h2>
+    {{#gt patient.engagement_rate 80}}
+        <div>
+        <img src="/media/success_badge.gif" alt="Badge" class="badge_center">
+        </div>
+    {{/gt}}
+    <br>
+
+    <div class = "centre-light-box" style="padding:0.5%">
+        <h2>Engagement Leaderboard</h2>
+            <table class="fixed_header">
+                <thead>
+                <tr>
+                    <th>Patient</th>
+                    <th>Engagement Rate</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {{#each leaderboard}}
+                            <tr>
+                            <td>{{this.displayname}}</td>
+                            <td>{{this.patient_id.engagement_rate}}</td>
+                            </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+    </div>
+    <br>
+
+    <p style="text-align:center">
+        <a class="heading-link" href="/main/patientDataEntry">Enter Health Data</a>
+    </p>
+    <br>
+    <div style="width:90%;margin-left:auto;margin-right:auto">
+        <hr class="link-separator">
+    </div>
+    <br>
+    <p style="text-align:center">  
+        <a class="heading-link" href="/main/accountView">My Account</a>
+    </p>
+    <br>
+    <div style="width:90%;margin-left:auto;margin-right:auto">
+        <hr class="link-separator">
+    </div>
+    <br>
+</div>
