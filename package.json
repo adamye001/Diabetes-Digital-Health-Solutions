@@ -3,9 +3,6 @@
 	"version": "1.0.0",
 	"description": "",
 	"main": "app.js",
-	"engines": {
-		"node": "14.x"
-	},
 	"scripts": {
 		"start": "node app.js",
 		"prettier": "prettier --single-quote --no-semi --tab-width 4 --write**/*.js *.js",
